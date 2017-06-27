@@ -1,26 +1,39 @@
-// Dec2Bin.cpp : main project file.
+// Dec2Bin.cpp : main project file. Created by Erin K Kennon
 
 #include "stdafx.h"
 #include <iostream>
 #include <limits>
+#include <string>
 
 using namespace std;
 using namespace System;
 
-void ConvertByRecursion(long long n);
 long long getDecimal();
+string getBinary();
+void ConvertByRecursion(long long n);
+void ConvertByArray(string n);
 
 int main()
 {
-	long long n;
+	int choice;
 	cout << "Welcome to the Decimal to Binary Converter" << endl;
-	n = getDecimal();
-	while (n != 0) {
-		ConvertByRecursion(n);
-		cout << endl << endl;
-		n = getDecimal();
+	cout << "Enter 1 for Dec-Bin or 2 for Bin-Dec (0 to exit): ";
+	cin >> choice;
+	while (choice > 0) {
+		if (choice == 1) {
+			long long n = getDecimal();
+			ConvertByRecursion(n);
+			cout << endl << endl;
+		}
+		else if (choice == 2) {
+			string n = getBinary();
+			ConvertByArray(n);
+			cout << endl << endl;
+		}
+		cout << "Enter 1 for Dec-Bin or 2 for Bin-Dec (0 to exit): ";
+		cin >> choice;
 	}
-	cout << "\nThanks for using the decimal converter";
+	cout << "\nThanks for using the decimal converter" << endl;
 	system("Pause");
     return 0;
 }
@@ -47,6 +60,25 @@ long long getDecimal() {
 	return n;
 }
 
+string getBinary() {
+	string n;
+	bool baddata;
+
+	do {
+		baddata = false;
+		cout << "Please enter your binary value to convert: ";
+		cin.ignore();
+		std::getline(cin, n);
+
+		for (char& c : n) {//c++ has for each loops !!!
+			if (c != '0' && c != '1') {
+				baddata = true;
+			}
+		}
+	} while (baddata);
+	return n;
+}
+
 void ConvertByRecursion(long long n) {
 	long long remainder;
 	long long nextvalue;
@@ -60,4 +92,8 @@ void ConvertByRecursion(long long n) {
 		cout << "\nTherefore the binary value is: ";
 	}
 	cout << remainder;
+}
+
+void ConvertByArray(string n) {
+	
 }
