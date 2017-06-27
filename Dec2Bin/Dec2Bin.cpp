@@ -4,6 +4,7 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include <math.h>
 
 using namespace std;
 using namespace System;
@@ -62,20 +63,26 @@ long long getDecimal() {
 
 string getBinary() {
 	string n;
-	bool baddata;
+	bool baddata = true;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-	do {
+	while(baddata) {
+		n = "";
 		baddata = false;
 		cout << "Please enter your binary value to convert: ";
-		cin.ignore();
-		std::getline(cin, n);
+		
+		getline(cin, n);
 
 		for (char& c : n) {//c++ has for each loops !!!
 			if (c != '0' && c != '1') {
 				baddata = true;
 			}
 		}
-	} while (baddata);
+		if (baddata) {
+			cout << "A binary number contains only 0 and 1. (Press Enter)";
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
 	return n;
 }
 
@@ -95,5 +102,14 @@ void ConvertByRecursion(long long n) {
 }
 
 void ConvertByArray(string n) {
-	
+	int result = 0;
+	int exponent = n.length() - 1;
+
+	for (int i = 0; i < n.length(); i++) {
+		if (n[i] == '1') {
+			int posval = pow(2, exponent-i);
+			result += posval;
+		}
+	}
+	cout << "the result is " << result;
 }
