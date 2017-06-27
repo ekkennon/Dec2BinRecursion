@@ -103,13 +103,15 @@ void ConvertByRecursion(long long n) {
 
 void ConvertByArray(string n) {
 	int result = 0;
-	int exponent = n.length() - 1;
+	const int expmod = n.length() - 1;
 
 	for (int i = 0; i < n.length(); i++) {
 		if (n[i] == '1') {
-			int posval = pow(2, exponent-i);
+			int exponent = expmod - i;
+			int posval = pow(2, exponent);
 			result += posval;
+			Console::WriteLine("There is a {0,1:D} in the value (2^{1,2:D})",posval,exponent);
 		}
 	}
-	cout << "the result is " << result;
+	cout << "Therefore the decimal value is: " << result <<endl;
 }
