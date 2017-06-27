@@ -48,5 +48,16 @@ long long getDecimal() {
 }
 
 void ConvertByRecursion(long long n) {
-
+	long long remainder;
+	long long nextvalue;
+	remainder = n % 2;
+	nextvalue = n / 2;
+	Console::WriteLine("Decimal {0,12:D} divided by 2 = {1,12:D} with remainder of {2, 3:D} ",n,nextvalue,remainder);
+	if (nextvalue > 0) {
+		ConvertByRecursion(nextvalue);
+	}
+	else {
+		cout << "\nTherefore the binary value is: ";
+	}
+	cout << remainder;
 }
