@@ -27,7 +27,23 @@ int main()
 
 long long getDecimal() {
 	long long n;
-	
+	bool baddata;
+
+	do {
+		baddata = false;
+		cout << "Please enter your decimal value to convert: ";
+		cin >> n;
+		if (!cin.good()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Your data was bad so I could not decipher your input as a decimal value." << endl;
+			baddata = true;
+		}
+		else if (n < 0) {
+			cout << "Please enter a positive value." << endl;
+			baddata = true;
+		}
+	} while (baddata);
 	return n;
 }
 
